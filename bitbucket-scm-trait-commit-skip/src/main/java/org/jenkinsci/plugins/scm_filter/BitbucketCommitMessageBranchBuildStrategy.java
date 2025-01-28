@@ -2,6 +2,7 @@ package org.jenkinsci.plugins.scm_filter;
 
 import javax.annotation.Nonnull;
 
+import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketGitSCMRevision;
@@ -37,6 +38,7 @@ public class BitbucketCommitMessageBranchBuildStrategy extends CommitMessageBran
     }
 
     @Extension
+    @Symbol("bitbucketCommitMessageBranchBuildStrategy")
     public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
 
         @Override

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
+import org.jenkinsci.Symbol;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
 import org.kohsuke.github.GHCommit;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -33,6 +34,7 @@ public class GitHubCommitAuthorBranchBuildStrategy extends CommitAuthorBranchBui
     }
 
     @Extension
+    @Symbol("gitHubCommitAuthorBranchBuildStrategy")
     public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
 
         @Override
