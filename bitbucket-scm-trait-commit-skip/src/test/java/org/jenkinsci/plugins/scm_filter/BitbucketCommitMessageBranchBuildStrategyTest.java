@@ -12,6 +12,8 @@ import com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource;
 import com.cloudbees.jenkins.plugins.bitbucket.client.branch.BitbucketCloudAuthor;
 import com.cloudbees.jenkins.plugins.bitbucket.client.branch.BitbucketCloudCommit;
 
+import hudson.model.TaskListener;
+import java.util.List;
 import jenkins.scm.api.SCMHead;
 
 public class BitbucketCommitMessageBranchBuildStrategyTest {
@@ -23,7 +25,7 @@ public class BitbucketCommitMessageBranchBuildStrategyTest {
         when(head.getName()).thenReturn("feature/release");
 
         BitbucketSCMSource source = new BitbucketSCMSource("amuniz", "test-repos");
-        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null), equalTo(false));
+        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null, null, TaskListener.NULL), equalTo(false));
     }
 
     @Test
@@ -34,13 +36,15 @@ public class BitbucketCommitMessageBranchBuildStrategyTest {
         when(head.getName()).thenReturn("feature/release");
         
         BitbucketSCMSource source = new BitbucketSCMSource("amuniz", "test-repos");
-        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null), equalTo(true));
+        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null, null, TaskListener.NULL), equalTo(true));
     }
 
     private BitbucketGitSCMRevision buildRevision(SCMHead head) {
-        BitbucketCloudAuthor author = new BitbucketCloudAuthor();
+        BitbucketCloudAuthor author = new BitbucketCloudAuthor("amuniz");
         author.setRaw("builder <no-reply@acme.com>");
-        BitbucketCloudCommit commit = new BitbucketCloudCommit("initial commit", "2018-09-21T14:57:59.455870+00:00", "12345674890", author);
+        BitbucketCloudAuthor committer = author;
+        List<BitbucketCloudCommit.Parent> parents = null;
+        BitbucketCloudCommit commit = new BitbucketCloudCommit("initial commit", "2018-09-21T14:57:59.455870+00:00", "12345674890", author, committer, parents);
         return new BitbucketGitSCMRevision(head, commit);
     }
 }

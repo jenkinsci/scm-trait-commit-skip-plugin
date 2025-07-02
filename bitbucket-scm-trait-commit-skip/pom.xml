@@ -12,31 +12,12 @@
     <packaging>hpi</packaging>
 
     <name>Bitbucket Commit Skip SCM Behaviour</name>
-    <url>https://wiki.jenkins-ci.org/display/JENKINS/Bitbucket+Commit+Skip+SCM+Behaviour+Plugin</url>
-    <description>Allows to ignore Bitbucket branches/pull requests/commits based on the content of commit messages</description>
-
-    <repositories>
-        <repository>
-            <id>incrementals.jenkins-ci.org</id>
-            <url>https://repo.jenkins-ci.org/incrementals/</url>
-        </repository>
-    </repositories>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.jcraft</groupId>
-                <artifactId>jsch</artifactId>
-                <version>0.1.53</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <url>https://github.com/jenkinsci/scm-trait-commit-skip-plugin/bitbucket-scm-trait-commit-skip/README.md</url>
 
     <dependencies>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>cloudbees-bitbucket-branch-source</artifactId>
-            <version>${bitbucket-branch-source.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
@@ -48,9 +29,12 @@
             <artifactId>branch-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.jenkins.plugins</groupId>
+            <artifactId>asm-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

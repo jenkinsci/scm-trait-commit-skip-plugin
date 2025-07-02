@@ -11,22 +11,6 @@
     <artifactId>scm-trait-commit-skip-common</artifactId>
 
     <name>Commit Skip SCM Behaviour shared components</name>
-    <description>Common code that is used in other modules</description>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jenkins-ci.plugins</groupId>
-                <artifactId>junit</artifactId>
-                <version>1.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jenkins-ci.plugins</groupId>
-                <artifactId>structs</artifactId>
-                <version>1.10</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>

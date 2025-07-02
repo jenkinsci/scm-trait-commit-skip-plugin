@@ -1,10 +1,11 @@
 # Commit skip SCM filters
 
-This repository contains a collection of traits for several branch-source Jenkins plugins.
+This repository contains a collection of traits for several Jenkins branch source plugins.
 
 It provides filters for both pull requests and/or branches on jobs created from these plugins
- - [GitHub Branch Source](https://github.com/jenkinsci/github-branch-source-plugin)
- - [Bitbucket Branch Source](https://github.com/jenkinsci/bitbucket-branch-source-plugin)
+
+- [GitHub Branch Source](https://plugins.jenkins.io/github-branch-source/)
+- [Bitbucket Branch Source](https://plugins.jenkins.io/cloudbees-bitbucket-branch-source/)
 
 The filtering will be performed, applying it whether it:
 

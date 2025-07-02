@@ -1,6 +1,6 @@
 package org.jenkinsci.plugins.scm_filter;
 
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -24,12 +24,10 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
     @Override
     public String getAuthor(SCMSource source, SCMRevision currRevision) throws CouldNotGetCommitDataException {
         SCMRevision revision = currRevision;
-        if (currRevision instanceof PullRequestSCMRevision) {
-            PullRequestSCMRevision<?> pr = (PullRequestSCMRevision<?>) currRevision;
+        if (currRevision instanceof PullRequestSCMRevision pr) {
             revision = pr.getPull();
         }
-        if (revision instanceof BitbucketGitSCMRevision) {
-            BitbucketGitSCMRevision bbRevision = (BitbucketGitSCMRevision) revision;
+        if (revision instanceof BitbucketGitSCMRevision bbRevision) {
             return Util.fixEmpty(bbRevision.getAuthor());
         }
 
@@ -40,7 +38,7 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
     public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
 
         @Override
-        @Nonnull
+        @NonNull
         public String getDisplayName() {
             return CommitAuthorBranchBuildStrategy.getDisplayName();
         }
@@ -50,7 +48,7 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
          * this is currently never called for organization folders, see JENKINS-54468
          */
         @Override
-        public boolean isApplicable(@Nonnull SCMSourceDescriptor sourceDescriptor) {
+        public boolean isApplicable(@NonNull SCMSourceDescriptor sourceDescriptor) {
             return BitbucketSCMSource.DescriptorImpl.class.isAssignableFrom(sourceDescriptor.getClass());
         }
     }

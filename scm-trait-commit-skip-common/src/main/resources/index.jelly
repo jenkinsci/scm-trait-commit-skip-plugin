@@ -1,0 +1,6 @@
+<?jelly escape-by-default='true'?>
+<div>
+  Extends the filtering abilities of the branch source plugins.
+  Ignores events when the source branch last commit contains the tags [skip ci] or [ci skip].
+  The filtering is only performed for change request events, so push events to non-pull requests will be always run.
+</div>

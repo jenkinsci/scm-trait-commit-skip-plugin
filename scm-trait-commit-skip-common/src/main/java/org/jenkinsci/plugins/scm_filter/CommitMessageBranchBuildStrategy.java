@@ -1,10 +1,13 @@
 package org.jenkinsci.plugins.scm_filter;
 
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import hudson.model.TaskListener;
 import jenkins.branch.BranchBuildStrategy;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMRevision;
@@ -44,12 +47,17 @@ public abstract class CommitMessageBranchBuildStrategy extends BranchBuildStrate
     }
 
     @Override
-    public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision, SCMRevision prevRevision) {
+    public boolean isAutomaticBuild(@NonNull SCMSource source,
+                                    @NonNull SCMHead head,
+                                    @NonNull SCMRevision currRevision,
+                                    @CheckForNull SCMRevision lastBuiltRevision,
+                                    @CheckForNull SCMRevision lastSeenRevision,
+                                    @NonNull TaskListener listener) {
         String message = null;
         try {
             message = getMessage(source, currRevision);
         } catch (CouldNotGetCommitDataException e) {
-            LOGGER.error("Could not attempt to prevent automatic build by commit message pattern "
+            listener.error("Could not attempt to prevent automatic build by commit message pattern "
                     + "because of an error when fetching the commit message", e);
             return true;
         }

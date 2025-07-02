@@ -12,24 +12,12 @@
     <packaging>hpi</packaging>
 
     <name>GitHub Commit Skip SCM Behaviour</name>
-    <url>https://wiki.jenkins-ci.org/display/JENKINS/GitHub+Commit+Skip+SCM+Behaviour+Plugin</url>
-    <description>Allows to ignore GitHub branches/pull requests/commits based on the content of commit messages</description>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jenkins-ci.plugins</groupId>
-                <artifactId>plain-credentials</artifactId>
-                <version>1.3</version>
-	        </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <url>https://github.com/jenkinsci/scm-trait-commit-skip-plugin/github-scm-trait-commit-skip/README.md</url>
 
     <dependencies>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>github-branch-source</artifactId>
-            <version>${github-branch-source.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
@@ -40,18 +28,14 @@
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>branch-api</artifactId>
         </dependency>
-
-        <!-- optional (maybe not so) dependency of git, needed to make InjectedTest works -->
         <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>token-macro</artifactId>
-            <version>1.12.1</version>
-            <scope>test</scope>
+            <groupId>io.jenkins.plugins</groupId>
+            <artifactId>asm-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

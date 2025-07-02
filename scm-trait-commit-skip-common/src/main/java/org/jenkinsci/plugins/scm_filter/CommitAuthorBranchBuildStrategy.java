@@ -1,10 +1,10 @@
 package org.jenkinsci.plugins.scm_filter;
 
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import hudson.model.TaskListener;
 import jenkins.branch.BranchBuildStrategy;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMRevision;
@@ -15,8 +15,6 @@ import jenkins.scm.api.SCMSourceOwner;
  * A strategy for avoiding automatic builds for commits with authors that contain a specific pattern.
  */
 public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrategy {
-
-    private final static Logger LOGGER = LoggerFactory.getLogger(CommitAuthorBranchBuildStrategy.class);
 
     private final String pattern;
 
@@ -44,17 +42,22 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
     }
 
     @Override
-    public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision, SCMRevision prevRevision) {
+    public boolean isAutomaticBuild(@NonNull SCMSource source,
+                                    @NonNull SCMHead head,
+                                    @NonNull SCMRevision currRevision,
+                                    @CheckForNull SCMRevision lastBuiltRevision,
+                                    @CheckForNull SCMRevision lastSeenRevision,
+                                    @NonNull TaskListener listener) {
         String author = null;
         try {
             author = getAuthor(source, currRevision);
         } catch (CouldNotGetCommitDataException e) {
-            LOGGER.error("Could not attempt to prevent automatic build by commit author pattern "
-                    + "because of an error when fetching the commit author", e);
+            listener.error("Could not attempt to prevent automatic build by commit author pattern "
+                    + "because of an error when fetching the commit author: %s", e);
             return true;
         }
         if (author == null) {
-            LOGGER.info("Could not attempt to prevent automatic build by commit author pattern "
+            listener.getLogger().println("Could not attempt to prevent automatic build by commit author pattern "
                     + "because commit author is null");
             return true;
         }
@@ -64,8 +67,8 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
             if (owner != null) {
                 ownerDisplayName = owner.getDisplayName();
             }
-            LOGGER.info("Automatic build prevented for job [{}] because commit author [{}] "
-                    + "matched expression [{}]", ownerDisplayName, author, pattern);
+            listener.getLogger().format("Automatic build prevented for job [{}] because commit author [{}] "
+                    + "matched expression [{}]%n", ownerDisplayName, author, pattern);
             return false;
         }
         return true;
