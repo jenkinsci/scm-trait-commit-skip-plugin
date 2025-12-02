@@ -36,7 +36,7 @@
         <java.level>8</java.level>
     </properties>
 
-    <scm>
+    <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
         <connection>scm:git:git://github.com/jenkinsci/scm-trait-commit-skip-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jenkinsci/scm-trait-commit-skip-plugin.git</developerConnection>
         <url>https://github.com/jenkinsci/scm-trait-commit-skip-plugin</url>
