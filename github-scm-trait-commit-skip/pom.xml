@@ -12,7 +12,7 @@
     <packaging>hpi</packaging>
 
     <name>GitHub Commit Skip SCM Behaviour</name>
-    <url>https://wiki.jenkins-ci.org/display/JENKINS/GitHub+Commit+Skip+SCM+Behaviour+Plugin</url>
+    <url>https://github.com/jenkinsci/scm-trait-commit-skip-plugin/github-scm-trait-commit-skip</url>
     <description>Allows to ignore GitHub branches/pull requests/commits based on the content of commit messages</description>
 
     <dependencyManagement>
